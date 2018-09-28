@@ -38,12 +38,14 @@ app.post(
   (req, res) => {
     if(!util.checkExt(path.extname(req.file.originalname))){
       res.status(403).end('Only .bmp/.png/.jpg files can be resized');
-    }
+    }else if(util.checkSize(req.body, nconf.get())){
+      res.status(403).end(`Request size is too large. Limit is x:${nconf.get().maxSizeX},y:${nconf.get().maxSizeY}`);
+    }else{
     const filePath = req.file.path+path.extname(req.file.originalname)
       fs.rename(req.file.path, filePath, err => {
         if (err) return handleError(err, res);
         util.pythonHandler(req,res,filePath)
       });
-
+    }
   }
 );

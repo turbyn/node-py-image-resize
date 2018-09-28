@@ -32,7 +32,9 @@ const configInit = (nconfData) => {
   if(!fs.existsSync('./config.json')){
     const baseConfig = {
       "path":"",
-      "maxSizeBytes": 5000000
+      "maxSizeBytes": 5000000,
+      "maxSizeX":4000,
+      "maxSizeY":4000
     }
     console.log('No config found, creating config.json');
     fs.writeFileSync('config.json', JSON.stringify(baseConfig));
@@ -43,8 +45,15 @@ const configInit = (nconfData) => {
   }
 }
 
+const checkSize = (body,config) => {
+  if(body.x > config.maxSizeX || body.y > config.maxSizeY){
+    return true;
+  }
+}
+
 module.exports = {
   checkExt,
   pythonHandler,
-  configInit
+  configInit,
+  checkSize
 }
