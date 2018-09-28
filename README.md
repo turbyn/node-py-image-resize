@@ -2,7 +2,7 @@
 
 Project was created as an example of running python script as child process module.
 
-To run, you'll need nodejs, python and [PIP](https://docs.docker.com/install/)) installed.
+To run, you'll need nodejs, python and [PIP](https://docs.docker.com/install/) installed.
 
 Once that is installed, run
 
